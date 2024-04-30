@@ -1,9 +1,11 @@
 import { useState } from "react";
+import Header from "./components/Layout/Header";
+import "./style.css";
 
 function App() {
   return (
     <>
-      <h3>Food Order App</h3>
+      <Header />
     </>
   );
 }
