@@ -7,9 +7,11 @@ import "./style.css";
 function App() {
   return (
     <>
-      <Header />
-      <Meals />
       <Cart />
+      <Header />
+      <main>
+        <Meals />
+      </main>
     </>
   );
 }
