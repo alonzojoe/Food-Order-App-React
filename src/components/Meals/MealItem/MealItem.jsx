@@ -3,7 +3,7 @@ import MealItemForm from "./MealItemForm";
 import classes from "./MealItem.module.css";
 
 const MealItem = ({ meal }) => {
-  const { name, description, price } = meal;
+  const { id, name, description, price } = meal;
 
   const formattedPrice = `$ ${price}`;
   return (
@@ -14,7 +14,7 @@ const MealItem = ({ meal }) => {
         <div className={classes.price}>{formattedPrice}</div>
       </div>
       <div>
-        <MealItemForm />
+        <MealItemForm id={id} />
       </div>
     </li>
   );
