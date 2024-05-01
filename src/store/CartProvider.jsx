@@ -24,7 +24,6 @@ const cartReducer = (state, action) => {
         const updatedItem = {
           ...existingItem,
           amount: existingItem.amount + action.item.amount,
-          price: existingItem.price + action.item.price,
         };
 
         updatedItems = [...state.items];
@@ -38,23 +37,35 @@ const cartReducer = (state, action) => {
         totalAmount: updatedTotalAmount,
       };
     case "REMOVE_ITEM":
-      const itemTobeRemoved = state.items.find((item) => item.id === action.id);
+      alert('test')
+      return
+      const existingCartItemIndex = state.items.findIndex(
+        (item) => item.id === action.id
+      );
+      const existingMeal = state.items[existingCartItemIndex];
 
-      if (!itemTobeRemoved) {
-        return state;
+      const updatedAmount = state.totalAmount - existingMeal.price;
+      let updatedMeals;
+      if (existingMeal.amount === 1) {
+        state.items.filter((item) => item.id !== action.id);
+      } else {
+        const updatedMeal = {
+          ...existingMeal,
+          amount: existingMeal.amount - 1,
+        };
+        updatedMeals = [...state.items];
+        updatedMeals[existingCartItemIndex] = updatedMeal;
+
+        return {
+          item: updatedMeals,
+          totalAmount: updatedAmount,
+        };
       }
-      const filteredItems = state.items.filter((item) => item.id !== action.id);
-      const reducedAmount =
-        state.totalAmount - itemTobeRemoved.price * itemTobeRemoved.amount;
-      return {
-        items: filteredItems,
-        totalAmount: reducedAmount,
-      };
-    default:
-      console.log("Action Not Found");
+
       break;
+    default:
+      return initialState;
   }
-  return initialState;
 };
 
 const CartProvider = (props) => {
