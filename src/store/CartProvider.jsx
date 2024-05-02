@@ -61,7 +61,6 @@ const cartReducer = (state, action) => {
         items: updatedMeals,
         totalAmount: updatedAmount,
       };
-      break;
     default:
       return initialState;
   }
