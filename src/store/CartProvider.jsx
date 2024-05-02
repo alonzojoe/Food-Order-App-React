@@ -59,7 +59,7 @@ const cartReducer = (state, action) => {
 
       return {
         items: updatedMeals,
-        totalAmount: updatedAmount,
+        totalAmount: Math.max(updatedAmount, 0),
       };
     default:
       return initialState;
