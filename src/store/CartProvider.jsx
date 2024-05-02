@@ -37,17 +37,17 @@ const cartReducer = (state, action) => {
         totalAmount: updatedTotalAmount,
       };
     case "REMOVE_ITEM":
-      alert('test')
-      return
       const existingCartItemIndex = state.items.findIndex(
         (item) => item.id === action.id
       );
+
       const existingMeal = state.items[existingCartItemIndex];
 
       const updatedAmount = state.totalAmount - existingMeal.price;
+      console.log("updated total amount after removal of item", updatedAmount);
       let updatedMeals;
       if (existingMeal.amount === 1) {
-        state.items.filter((item) => item.id !== action.id);
+        updatedMeals = state.items.filter((item) => item.id !== action.id);
       } else {
         const updatedMeal = {
           ...existingMeal,
@@ -55,13 +55,12 @@ const cartReducer = (state, action) => {
         };
         updatedMeals = [...state.items];
         updatedMeals[existingCartItemIndex] = updatedMeal;
-
-        return {
-          item: updatedMeals,
-          totalAmount: updatedAmount,
-        };
       }
 
+      return {
+        items: updatedMeals,
+        totalAmount: updatedAmount,
+      };
       break;
     default:
       return initialState;
