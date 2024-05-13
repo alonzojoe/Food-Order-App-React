@@ -13,7 +13,7 @@ const AvailableMeals = () => {
     const fetchMeals = async () => {
       setIsLoading(true);
 
-      const response = await fetch(`${baseUrl}/meals`, {});
+      const response = await fetch(`${baseUrl}/meals.json`, {});
       const responseData = await response.json();
       const loadedData = [];
 
