@@ -26,8 +26,8 @@ const Checkout = (props) => {
 
     const nameValid = !isEmpty(enteredName);
     const streetValid = !isEmpty(enteredStreet);
-    const postalValid = !isEmpty(enteredPostal);
-    const cityValid = !isFiveChars(enteredCity);
+    const postalValid = isFiveChars(enteredPostal);
+    const cityValid = !isEmpty(enteredCity);
 
     setFormValid({
       name: nameValid,
@@ -45,28 +45,44 @@ const Checkout = (props) => {
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
-      <div className={classes.control}>
+      <div
+        className={`${classes.control} ${
+          !formValid.name ? classes.invalid : ""
+        }`}
+      >
         <label htmlFor="name">Your Name:</label>
         <input type="text" ref={nameInputRef} id="name" />
         {!formValid.name && (
           <p className={classes.error}>Please enter a valid name</p>
         )}
       </div>
-      <div className={classes.control}>
+      <div
+        className={`${classes.control} ${
+          !formValid.street ? classes.invalid : ""
+        }`}
+      >
         <label htmlFor="street">Street:</label>
         <input type="text" ref={streetInputRef} id="street" />
         {!formValid.street && (
           <p className={classes.error}>Please enter a valid street</p>
         )}
       </div>
-      <div className={classes.control}>
+      <div
+        className={`${classes.control} ${
+          !formValid.postal ? classes.invalid : ""
+        }`}
+      >
         <label htmlFor="postal">Postal Code:</label>
         <input type="text" ref={postalInputRef} id="postal" />
         {!formValid.postal && (
           <p className={classes.error}>Please enter a valid postal code</p>
         )}
       </div>
-      <div className={classes.control}>
+      <div
+        className={`${classes.control} ${
+          !formValid.city ? classes.invalid : ""
+        }`}
+      >
         <label htmlFor="city">City:</label>
         <input type="text" ref={cityInputRef} id="city" />
         {!formValid.city && (
